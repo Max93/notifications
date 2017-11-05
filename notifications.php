@@ -16,3 +16,6 @@ include_once dirname( __FILE__ ) . '/init.php';
 
 register_activation_hook( __FILE__, ['Init', 'activation']);
 register_uninstall_hook( __FILE__, ['Init', 'uninstall']);
+
+require_once(__DIR__ . '/vendor/autoload.php');
+require_once(__DIR__ . '/app/API/functions.php');
