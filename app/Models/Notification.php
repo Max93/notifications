@@ -2,6 +2,7 @@
 namespace SimpleNotifications\Models;
 
 use SimpleNotifications\Interfaces\NotificationInterface;
+use SimpleNotifications\Interfaces\UserInterface;
 use \DateTime;
 
 class Notification implements NotificationInterface
@@ -10,19 +11,23 @@ class Notification implements NotificationInterface
     private $date;
     private $description;
     private $type;
+    private $userId;
     private $action;
 
-    public function __construct($description, $type, $action = null)
+    public function __construct($description, $type, $userId = null, $action = null)
     {
         $this->description = $description;
         $this->type = $type;
+        $this->userId = $userId;
         $this->action = $action;
     }
 
-    public static function createFromData($data) {
-        $notification = new self($data['description'], $data['type'], $data['action']);
+    public static function createFromData($data)
+    {
+        $notification = new self($data['description'], $data['type'], $data['user_id'], $data['action']);
         $notification->setId($data['id']);
         $notification->setDate(new \DateTime($data['date']));
+        $notification->setUserId($data['user_id']);
         return $notification;
     }
 
@@ -68,6 +73,17 @@ class Notification implements NotificationInterface
     public function getType()
     {
         return $this->type;
+    }
+
+    public function setUserId($userId)
+    {
+        $this->userId = $userId;
+        return $this;
+    }
+
+    public function getUserId()
+    {
+        return $this->userId;
     }
 
     public function setAction($action)
