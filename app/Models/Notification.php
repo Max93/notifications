@@ -12,14 +12,18 @@ class Notification implements NotificationInterface
     private $type;
     private $action;
 
-    public function __construct($id, DateTime $date, $description, $type, $action = null)
+    public function __construct($description, $type, $action = null)
     {
-        $this->id = $id;
-        $this->date = $date;
-        $this->descrption = $descrption;
         $this->description = $description;
         $this->type = $type;
         $this->action = $action;
+    }
+
+    public static function createFromData($data) {
+        $notification = new self($data['description'], $data['type'], $data['action']);
+        $notification->setId($data['id']);
+        $notification->setDate(new \DateTime($data['date']));
+        return $notification;
     }
 
     public function setId($id)

@@ -7,7 +7,7 @@ interface NotificationInterface
 {
     public function setId($id);
     public function getId();
-    public function setDate(\DateTime $date);
+    public function setDate(DateTime $date);
     public function getDate();
     public function setDescription($description);
     public function getDescription();
