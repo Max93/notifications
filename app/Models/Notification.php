@@ -4,19 +4,20 @@ namespace SimpleNotifications\Models;
 use SimpleNotifications\Interfaces\NotificationInterface;
 use \DateTime;
 
-class Notification implements NotificationInterface;
+class Notification implements NotificationInterface
 {
     private $id;
     private $date;
-    private $descrption;
+    private $description;
     private $type;
     private $action;
 
-    public function __construct($id, DateTime $date, $descrption, $type, $action = null)
+    public function __construct($id, DateTime $date, $description, $type, $action = null)
     {
         $this->id = $id;
         $this->date = $date;
         $this->descrption = $descrption;
+        $this->description = $description;
         $this->type = $type;
         $this->action = $action;
     }
