@@ -1,0 +1,24 @@
+{
+	"name": "Max93/notifications",
+	"description": "Notifications for WordPress",
+	"keywords": ["wordpress", "plugin", "notifications"],
+	"homepage": "https://github.com/Max93/notifications",
+	"license": "GPL",
+	"authors": [
+		{
+			"name": "Massimo Ruggirello",
+			"email": "massimoruggirello@gmail.com",
+			"homepage": "https://github.com/Max93"
+		}
+	],
+	"type": "wordpress-plugin",
+	"require": {
+		"php": ">=5.3.2",
+		"composer/installers": "v1.0.6"
+	},
+	"autoload": {
+		"psr-4" : {
+			"SimpleNotifications\\" : "app/"
+		}
+	}
+}
