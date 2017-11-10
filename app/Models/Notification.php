@@ -28,6 +28,8 @@ class Notification implements NotificationInterface
         $notification->setId($data['id']);
         $notification->setDate(new \DateTime($data['date']));
         $notification->setUserId($data['user_id']);
+        $notification->setVisualized($data['visualized']);
+
         return $notification;
     }
 
@@ -95,5 +97,16 @@ class Notification implements NotificationInterface
     public function getAction()
     {
         return $this->action;
+    }
+
+    public function setVisualized($visualized)
+    {
+        $this->visualized = $visualized;
+        return $this;
+    }
+
+    public function getVisualized()
+    {
+        return $this->visualized;
     }
 }
