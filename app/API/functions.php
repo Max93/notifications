@@ -52,3 +52,13 @@ function findNotificationsByUser(UserInterface $user, $limit = 6)
 		return Notification::createFromData((array)$notificationData, $user);
 	}, $wpdb->get_results('SELECT * FROM ' . $wpdb->prefix . 'notifications WHERE user_id = ' . $user->getId() .' LIMIT ' . $limit .' ;'));
 }
+
+function markVisualized(NotificationInterface $notification)
+{
+	$notificationUpdated = $wpdb->update($wpdb->prefix . 'notifications', ['visualized' => 1], ['id' => $notification->getId()], ['%d'], ['%d']);
+
+	if(!$notificationUpdated)
+		return null;
+
+	return Notification::createFromData((array)$notificationData);
+}
