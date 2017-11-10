@@ -8,15 +8,37 @@ use SimpleNotifications\Models\Notification;
 
 function getUserModel($id)
 {
-	return new User();
+	return new User($id);
 }
 
 function getNotificationModel($id)
 {
-	return new Notification();
+	global $wpdb;
+	$notificationData = (array)$wpdb->get_row('SELECT * FROM ' . $wpdb->prefix . 'notifications WHERE id = ' . $id);
+	return Notification::createFromData($notificationData);
 }
 
-function createNotification(UserInterface $user)
+function createNotificationModel($data)
 {
-	return new Notification();
+	if((! array_key_exists('description', $data) && data['description']) || (! array_key_exists('type', $data) && data['type']))
+		return null;
+
+	return new Notification($data['description'], $data['type']);
+}
+
+function createNotification(UserInterface $user, NotificationInterface $notification)
+{
+	global $wpdb;
+
+	$result = $wpdb->insert($wpdb->prefix . 'notifications', [
+      'description' => $notification->getDescription(),
+      'type' => $notification->getType()
+	], ['%s', '%s']);
+
+	if(!$result)
+		return null;
+
+	$notificationData = (array)$wpdb->get_row('SELECT * FROM ' . $wpdb->prefix . 'notifications WHERE id = ' . $wpdb->insert_id);
+
+	return Notification::createFromData($notificationData);
 }
