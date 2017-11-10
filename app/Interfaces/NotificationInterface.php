@@ -15,4 +15,6 @@ interface NotificationInterface
     public function getType();
     public function setAction($action);
     public function getAction();
+    public function setUserId($userId);
+    public function getUserId();
 }
